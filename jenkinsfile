@@ -30,7 +30,13 @@ pipeline {
           docker compose down
           docker stop petsalud-frontend-1 && docker stop petsalud-backend-1 && docker stop petsalud-db-1
           docker rmi -f $(docker images -q)
+          docker system prune -a --volumes
           docker system prune -a -f
+          docker builder prune --all
+          docker container prune -f
+          docker image prune -a -f
+          docker volume prune -f
+          docker builder prune -a -f
           docker compose build
           docker compose up db -d          
         '''
