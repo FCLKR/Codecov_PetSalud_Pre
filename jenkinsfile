@@ -27,7 +27,7 @@ pipeline {
           cd /tmp/petsalud
 
           echo "Construccion del proyecto..."
-          docker compose doWN
+          docker compose down
           docker system prune -a --volumes
           docker system prune -a -f
           docker builder prune --all
