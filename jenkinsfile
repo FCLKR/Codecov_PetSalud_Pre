@@ -28,19 +28,61 @@ pipeline {
           echo "Construccion del proyecto..."
           docker compose build --no-cache
 
-          echo "Levantando servicios con Docker Compose..."
+          
+        '''
+        /*echo "Levantando servicios con Docker Compose..."
           docker compose up -d
 
           echo "Contenedores en ejecución:"
-          docker compose ps
+          docker compose ps*/
+      }
+    }
+    stage('Test Mysql') {
+      steps {
+        echo "🚀 Iniciando despliegue con Docker Compose..."
+
+        // Copiamos el proyecto fuera del workspace de Jenkins
+        sh '''
+          set -e
+
+          echo "UP Mysql"
+          sleep 10
+          
         '''
       }
     }
+    stage('Run Tests in Backend Container') {
+            steps {
+                sh '''
+                docker-compose run --rm backend bash -c "
+                    pip install coverage pytest &&
+                    coverage run -m pytest &&
+                    coverage xml
+                "
+                '''
+            }
+        }
+    stage('Copy Coverage Report to Host') {
+            steps {
+                sh '''
+                docker cp $(docker ps -aqf "name=backend"):/app/coverage.xml .
+                '''
+            }
+        }
+
+    stage('Upload to Codecov') {
+            steps {
+                sh '''
+                bash <(curl -s https://codecov.io/bash) -f coverage.xml -R .
+                '''
+            }
+        }
   }
 
   post {
     success {
       echo "Despliegue completado correctamente."
+      sh 'docker compose down'
     }
     failure {
       echo "Fallo en el despliegue. Revisa los logs."
