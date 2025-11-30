@@ -1,18 +1,22 @@
 pipeline {
   agent any
 
+    environment {
+      CODECOV_TOKEN = credentials('CODECOV_TOKEN')
+  }
+
   stages {
 
     stage('Checkout') {
       steps {
-        echo "📦 Clonando el repositorio..."
+        echo "Clonando el repositorio..."
         checkout scm
       }
     }
 
     stage('Deploy') {
       steps {
-        echo "🚀 Iniciando despliegue con Docker Compose..."
+        echo "Iniciando despliegue con Docker Compose..."
 
         // Copiamos el proyecto fuera del workspace de Jenkins
         sh '''
