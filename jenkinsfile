@@ -27,11 +27,7 @@ pipeline {
           cd /tmp/petsalud
 
           echo "Construccion del proyecto..."
-          docker compose down
-          docker stop petsalud-frontend-1 && docker stop petsalud-backend-1 && docker stop petsalud-db-1
-          docker rmi -f $(docker images -q)
-          docker system prune -a -f
-          docker compose build
+          docker compose build --no-cache
         '''
       }
     }
