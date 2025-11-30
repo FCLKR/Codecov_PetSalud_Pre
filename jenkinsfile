@@ -69,25 +69,31 @@ pipeline {
             }
         }
     stage('Copy Coverage Report to Host') {
-            steps {
-                sh '''
-                docker cp $(docker ps -aqf "name=backend"):/app/app/coverage.xml .
-                '''
-            }
-        }
+      steps {
+        sh '''
+          set -e
+
+          # Obtener SOLO el contenedor backend-run (el de pruebas)
+          CONTAINER_ID=$(docker ps -aq --filter "name=backend-run" | head -n 1)
+
+          echo "Usando contenedor: $CONTAINER_ID"
+
+          # Copiar el coverage.xml del contenedor al host
+          docker cp $CONTAINER_ID:/app/app/coverage.xml coverage.xml
+        '''
+      }
+    }
 
     stage('Upload to Codecov') {
-            steps {
-                sh '''
-                # Obtener SOLO el contenedor backend de pruebas
-                CONTAINER_ID=$(docker ps -aq --filter "name=backend-run" | head -n 1)
+      steps {
+        sh '''
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN} -f coverage.xml
+        '''
+      }
+    }
 
-                echo "Usando contenedor: $CONTAINER_ID"
-
-                docker cp $CONTAINER_ID:/app/app/coverage.xml .
-                '''
-            }
-        }
     stage('Desplegar proyecto completo') {
             steps {
                 sh '''
