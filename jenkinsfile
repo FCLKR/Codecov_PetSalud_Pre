@@ -27,8 +27,7 @@ pipeline {
           cd /tmp/petsalud
 
           echo "Construccion del proyecto..."
-          docker compose down
-          docker rmi -f $(docker images -q)
+          docker compose doWN
           docker system prune -a --volumes
           docker system prune -a -f
           docker builder prune --all
@@ -36,6 +35,7 @@ pipeline {
           docker image prune -a -f
           docker volume prune -f
           docker builder prune -a -f
+          docker rmi -f $(docker images -q)
           docker compose build
           docker compose up db -d          
         '''
