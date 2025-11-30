@@ -79,9 +79,12 @@ pipeline {
     stage('Upload to Codecov') {
             steps {
                 sh '''
-                curl -Os https://uploader.codecov.io/latest/linux/codecov
-                chmod +x codecov
-                ./codecov -t ${CODECOV_TOKEN} -f coverage.xml
+                # Obtener SOLO el contenedor backend de pruebas
+                CONTAINER_ID=$(docker ps -aq --filter "name=backend-run" | head -n 1)
+
+                echo "Usando contenedor: $CONTAINER_ID"
+
+                docker cp $CONTAINER_ID:/app/app/coverage.xml .
                 '''
             }
         }
