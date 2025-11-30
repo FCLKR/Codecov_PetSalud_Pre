@@ -67,7 +67,7 @@ pipeline {
     stage('Copy Coverage Report to Host') {
             steps {
                 sh '''
-                docker cp $(docker ps -aqf "name=backend"):/app/coverage.xml .
+                docker cp $(docker ps -aqf "name=backend"):/app/app/coverage.xml .
                 '''
             }
         }
