@@ -23,13 +23,13 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar todo el código del backend
-COPY . .
+COPY . /app/
 
 # Dar permisos de ejecución al script de entrada
-RUN chmod +x entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Exponer el puerto del servidor Django
 EXPOSE 8000
 
 # Definir el punto de entrada
-ENTRYPOINT ["bash", "./entrypoint.sh"]
+ENTRYPOINT ["bash", "app/entrypoint.sh"]

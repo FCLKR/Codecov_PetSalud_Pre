@@ -54,7 +54,7 @@ pipeline {
     stage('Run Tests in Backend Container') {
     steps {
         sh '''
-        docker compose run --rm -v $PWD:/app backend bash -c "
+        docker compose run --rm --entrypoint "" backend bash -c "
             pip install coverage pytest &&
             coverage run -m pytest tests/ &&
             coverage xml
