@@ -1,7 +1,7 @@
 [run]
-source = backend
+source = backend/app
 
 [report]
 omit =
     */venv/*
-    *backend/tests/*
+    */tests/*

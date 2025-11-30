@@ -56,10 +56,12 @@ pipeline {
                 sh '''
                 set -e
                 docker compose run --rm --entrypoint "" backend bash -c "
+                    cd backend &&
                     pip install coverage pytest &&
-                    coverage run -m pytest &&
-                    coverage xml"
-                  '''
+                    coverage run -m pytest app/tests &&
+                    coverage xml
+                "
+                '''
             }
         }
     stage('Copy Coverage Report to Host') {
