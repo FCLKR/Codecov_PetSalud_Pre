@@ -52,32 +52,31 @@ pipeline {
       }
     }
     stage('Run Tests in Backend Container') {
-    steps {
-        sh '''
-        docker compose run --rm --entrypoint "" backend bash -c "
-            pip install coverage pytest &&
-            coverage run -m pytest tests/ &&
-            coverage xml
-        "
-        '''
-      }
-    }
-
-    stage('Copy Coverage Report to Host') {
-        steps {
-            sh '''
-            docker cp $(docker ps -aqf "name=backend"):/app/coverage.xml ./coverage.xml
-            '''
+            steps {
+                sh '''
+                docker-compose run --rm backend bash -c "
+                    pip install coverage pytest &&
+                    coverage run -m pytest &&
+                    coverage xml
+                "
+                '''
+            }
         }
-    }
+    stage('Copy Coverage Report to Host') {
+            steps {
+                sh '''
+                docker cp $(docker ps -aqf "name=backend"):/app/coverage.xml .
+                '''
+            }
+        }
 
     stage('Upload to Codecov') {
-        steps {
-            sh '''
-            bash <(curl -s https://codecov.io/bash) -f coverage.xml -R .
-            '''
+            steps {
+                sh '''
+                bash <(curl -s https://codecov.io/bash) -f coverage.xml -R .
+                '''
+            }
         }
-    }
   }
 
   post {
