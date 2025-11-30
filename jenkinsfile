@@ -81,12 +81,23 @@ pipeline {
                 '''
             }
         }
+    stage('Desplegar proyecto completo') {
+            steps {
+                sh '''
+                echo "Levantando servicios con Docker Compose..."
+                docker compose up -d
+
+                echo "Contenedores en ejecución:"
+                docker compose ps
+                '''
+            }
+        }
   }
 
   post {
     success {
       echo "Despliegue completado correctamente."
-      sh 'docker compose down'
+      //sh 'docker compose down'
     }
     failure {
       echo "Fallo en el despliegue. Revisa los logs."
