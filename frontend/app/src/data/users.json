@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Administrador",
+    "email": "admin@correo.com",
+    "password": "12345",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "Visualizador",
+    "email": "view@correo.com",
+    "password": "12345",
+    "role": "viewer"
+  },
+  {
+    "id": 3,
+    "name": "Cliente",
+    "email": "cliente@correo.com",
+    "password": "12345",
+    "role": "client"
+  }
+]

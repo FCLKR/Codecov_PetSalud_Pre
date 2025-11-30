@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: 54321
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=mydb
+      - DB_USER=user1
+      - DB_PASSWORD=12345
+      - DB_HOST=db
+      - DB_PORT=3306
+
+
+  # Desarrollo
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/app:/app
+      - /app/node_modules
+    command: npm run dev
+
+  # Produccion
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - backend
+
+volumes:
+  mysql_data:

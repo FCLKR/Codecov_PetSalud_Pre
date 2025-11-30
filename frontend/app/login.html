@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login y Registro | PetSalud</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">🐾PetSalud</div>
+    <nav class="nav">
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Sede</a>
+      <a href="#">Contáctanos</a>
+      <button class="btn-yellow">Iniciar sesión</button>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <div class="form-card">
+      <h2>Iniciar sesión</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Correo electronico" required />
+        <input type="password" id="loginPassword" placeholder="Contraseña" required />
+        <button type="submit" class="btn-red">Iniciar sesión</button>
+        <p id="loginError" class="error-message"></p>
+      </form>
+    </div>
+
+    <div class="form-card">
+      <h2>Registro</h2>
+      <form id="registerForm">
+        <input type="text" id="regName" placeholder="Nombre" required />
+        <input type="email" id="regEmail" placeholder="Correo electronico" required />
+        <input type="password" id="regPassword" placeholder="Contraseña" required />
+        <button type="submit" class="btn-red">Registrarse</button>
+        <p id="registerError" class="error-message"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div><strong>Pet Salud</strong><br />Cuidamos de tus mascotas con amor y profesionalismo</div>
+    <div><strong>Contacto</strong><br />contacto@petsalud.com</div>
+    <div><strong>Redes sociales</strong><br />Facebook<br />Instagram<br />X</div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Mario Torres", 
+        "text": "Llevé a mi perrito Max a Pet Salud por una emergencia y la atención fue increíble. El equipo actuó con rapidez y profesionalismo, logrando estabilizarlo en minutos. ¡Estoy eternamente agradecido!", 
+        "image": "src/utils/images/ProfileM.png" 
+    },
+
+    { 
+        "id": 2,
+        "name": "Andrea Gomez", 
+        "text": "Siempre llevo a mi perrita Luna a sus chequeos en Pet Salud y no podría estar más satisfecha. La atención es personalizada, el equipo es amable y realmente se preocupan por el bienestar de los animales. ¡Los recomiendo al 100%!", 
+        "image": "src/utils/images/ProfileA.png" 
+    },
+    
+    { 
+        "id": 3,
+        "name": "Carlos Ramirez", 
+        "text": "Mi gato Tomás necesitaba una cirugía y estaba muy nerviosa, pero los especialistas de Pet Salud me dieron tranquilidad desde el primer momento. Todo salió perfecto y hoy mi gatito está sano y feliz. ¡Gracias por el excelente servicio!", 
+        "image": "src/utils/images/ProfileC.png"
+    }
+]

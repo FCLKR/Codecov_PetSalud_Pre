@@ -1,0 +1,49 @@
+pipeline {
+  agent any
+
+  stages {
+
+    stage('Checkout') {
+      steps {
+        echo "📦 Clonando el repositorio..."
+        checkout scm
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        echo "🚀 Iniciando despliegue con Docker Compose..."
+
+        // Copiamos el proyecto fuera del workspace de Jenkins
+        sh '''
+          set -e
+
+          echo "Copiando proyecto a /tmp/petsalud..."
+          rm -rf /tmp/petsalud
+          mkdir -p /tmp/petsalud
+          cp -r . /tmp/petsalud
+
+          cd /tmp/petsalud
+
+          echo "Construccion del proyecto..."
+          docker compose build --no-cache
+
+          echo "Levantando servicios con Docker Compose..."
+          docker compose up -d
+
+          echo "Contenedores en ejecución:"
+          docker compose ps
+        '''
+      }
+    }
+  }
+
+  post {
+    success {
+      echo "Despliegue completado correctamente."
+    }
+    failure {
+      echo "Fallo en el despliegue. Revisa los logs."
+    }
+  }
+}
