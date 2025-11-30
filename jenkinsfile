@@ -23,14 +23,12 @@ pipeline {
           rm -rf /tmp/petsalud
           mkdir -p /tmp/petsalud
           cp -r . /tmp/petsalud
-
           cd /tmp/petsalud
-
           echo "Construccion del proyecto..."
           docker compose down
           docker builder prune -a -f
           docker compose build
-          docker compose up db -d          
+                   
         '''
       }
     }
@@ -41,6 +39,7 @@ pipeline {
           echo "Levantando solo MySQL..."
           cd /tmp/petsalud
           echo "Esperando MySQL..."
+          docker compose up db -d
           sleep 40
         '''
       }
