@@ -56,7 +56,7 @@ pipeline {
                 sh '''
                 set -e
                 docker compose run --rm --entrypoint "" backend bash -c "
-                    cd backend &&
+                    cd app &&
                     pip install coverage pytest &&
                     coverage run -m pytest app/tests &&
                     coverage xml
