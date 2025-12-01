@@ -5,14 +5,14 @@ pipeline {
     CODECOV_TOKEN = credentials('CODECOV_TOKEN')
   }
 
-  /*stages {
+  stages {
 
     stage('Checkout') {
       steps {
         echo "Clonando el repositorio..."
         checkout scm
       }
-    }*/
+    }
 
     stage('Deploy') {
       steps {
