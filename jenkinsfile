@@ -5,6 +5,17 @@ pipeline {
     CODECOV_TOKEN = credentials('CODECOV_TOKEN')
   }
 
+    options {
+    skipDefaultCheckout(true)
+  }
+
+  stages {
+    stage('Cleanup') {
+      steps {
+        deleteDir()   // Limpia todo el workspace
+      }
+    }
+  
   stages {
 
     stage('Checkout') {
