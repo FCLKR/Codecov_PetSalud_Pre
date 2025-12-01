@@ -10,14 +10,12 @@ pipeline {
   }
 
   stages {
+
     stage('Cleanup') {
       steps {
-        deleteDir()   // 🔥 Limpia todo el workspace
+        deleteDir()   // Limpia el workspace
       }
     }
-  }
-  
-  stages {
 
     stage('Checkout') {
       steps {
@@ -36,12 +34,12 @@ pipeline {
           mkdir -p /tmp/petsalud
           cp -r . /tmp/petsalud
           cd /tmp/petsalud
-          echo "Construccion del proyecto..."
+
+          echo "Construcción del proyecto..."
           docker compose down
-          docker rmi -f $(docker images -q)
-          docker builder prune -a
+          docker rmi -f $(docker images -q) || true
+          docker builder prune -a -f
           docker compose build
-                   
         '''
       }
     }
@@ -51,8 +49,8 @@ pipeline {
         sh '''
           echo "Levantando solo MySQL..."
           cd /tmp/petsalud
-          echo "Esperando MySQL..."
           docker compose up db -d
+          echo "Esperando MySQL..."
           sleep 40
         '''
       }
@@ -80,7 +78,6 @@ pipeline {
           echo "Buscando contenedor donde se ejecutaron los tests..."
 
           CONTAINER_ID=$(docker ps -aq --filter "name=backend" --filter "status=exited" | head -n 1)
-
           echo "Contenedor encontrado: $CONTAINER_ID"
 
           docker cp $CONTAINER_ID:/app/app/coverage.xml coverage.xml
