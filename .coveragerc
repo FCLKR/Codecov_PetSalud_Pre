@@ -1,5 +1,6 @@
 [run]
-source = backend/app ,tests
+source = app
+relative_files = True
 
 [report]
 omit =
