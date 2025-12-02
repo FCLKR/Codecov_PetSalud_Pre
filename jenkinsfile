@@ -36,7 +36,7 @@ pipeline {
           cd /tmp/petsalud
 
           echo "Construcción del proyecto..."
-          echo "docker compose down"
+          docker compose down
           echo "docker rmi -f $(docker images -q) || true"
           echo "docker builder prune -a -f"
           echo "Uso por primera vez-docker compose build"
