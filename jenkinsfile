@@ -51,12 +51,12 @@ pipeline {
           cd /tmp/petsalud
           docker compose up db -d
           echo "Esperando MySQL..."
-          sleep 40
+          sleep 10
         '''
       }
     }
 
-    stage('Run Tests in Backend Container') {
+ /*   stage('Run Tests in Backend Container') {
       steps {
         sh '''
           set -e
@@ -83,7 +83,35 @@ pipeline {
           docker cp $CONTAINER_ID:/app/app/coverage.xml coverage.xml
         '''
       }
+    }*/
+    stage('Run Tests in Backend Container') {
+      steps {
+        sh '''
+          set -e
+          cd /tmp/petsalud
+
+          docker compose run --name backend_test --entrypoint "" backend bash -c "
+            cd app &&
+            pip install coverage pytest &&
+            coverage run -m pytest tests &&
+            coverage xml
+          "
+        '''
+      }
     }
+
+    stage('Copy Coverage Report to Host') {
+      steps {
+        sh '''
+          set -e
+          echo "Copiando coverage desde backend_test..."
+
+          docker cp backend_test:/app/coverage.xml coverage.xml
+        '''
+      }
+    }
+
+
 
     stage('Upload to Codecov') {
       steps {
