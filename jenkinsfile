@@ -58,22 +58,22 @@ pipeline {
       }
     }
 
-    stage('Run Tests in Backend Container') {
+   stage('Run Tests in Backend Container') {
       steps {
         sh '''
           set -e
           cd /tmp/petsalud
           docker compose run --entrypoint "" backend bash -c "
-            pip install coverage pytest &&
-            echo 'Tests dentro del contenedor en /app/tests:' &&
-            ls -R /app/tests &&
-            coverage run -m pytest /app/tests &&
-            coverage xml
+          cd app &&
+                pip install coverage pytest &&
+                echo 'Tests dentro del contenedor:' &&
+                ls -l tests &&
+                coverage run -m pytest tests &&
+                coverage xml
           "
         '''
       }
     }
-
 
     stage('Copy Coverage Report to Host') {
       steps {
@@ -84,14 +84,11 @@ pipeline {
           CONTAINER_ID=$(docker ps -aq --filter "name=backend" --filter "status=exited" | head -n 1)
           echo "Contenedor encontrado: $CONTAINER_ID"
 
-          # coverage.xml queda en /app, NO en /app/app
-          docker cp $CONTAINER_ID:/app/coverage.xml coverage.xml
+          docker cp $CONTAINER_ID:/app/app/coverage.xml coverage.xml
         '''
       }
     }
-
-    /*   Manteniendo comentarios tuyos
-    stage('Run Tests in Backend Container') {
+ /*   stage('Run Tests in Backend Container') {
       steps {
         sh '''
           set -e
@@ -117,8 +114,9 @@ pipeline {
           docker cp backend_test:/app/app/coverage.xml coverage.xml
         '''
       }
-    }
-    */
+    }*/
+
+
 
     stage('Upload to Codecov') {
       steps {
