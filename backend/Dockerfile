@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app
 
 # Dar permisos de ejecución al script de entrada
-RUN chmod +x entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 # Exponer el puerto del servidor Django
 EXPOSE 8000
