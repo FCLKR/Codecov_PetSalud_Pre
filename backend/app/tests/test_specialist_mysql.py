@@ -44,7 +44,7 @@ def test_insertar_specialist_mysql():
     cursor.execute(
         """
         SELECT name_specialist, lastName_specialist, cc_specialist, 
-               phone_specialist, address_specialist
+               phone_specialist, adress_specialist,email_specialist
         FROM myproject_spealist 
         WHERE id = %s
         """,
@@ -64,6 +64,7 @@ def test_insertar_specialist_mysql():
     assert result[2] == cc_specialist
     assert result[3] == phone_specialist
     assert result[4] == address_specialist
+    assert result[5] == email_specialist
 
     cursor.close()
     conn.close()
