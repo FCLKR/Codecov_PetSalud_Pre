@@ -51,6 +51,8 @@ pipeline {
           cd /tmp/petsalud
           docker compose up db -d
           echo "Esperando MySQL..."
+          echo "Contenido real del proyecto en Jenkins:"
+          ls -R /tmp/petsalud/backend/app/tests
           sleep 10
         '''
       }

@@ -1,4 +1,4 @@
-#!/home/jaaz/Proyecto_CI/Codecov_PetSalud_Pre/venv/bin/python3
+#!/home/jaaz/Proyects/Codecov_PetSalud_Pre/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
