@@ -16,8 +16,8 @@ def test_insertar_specialist_mysql():
     # Datos de prueba
     name_specialist = "Carlos"
     lastName_specialist = "Test"
-    cc_specialist = "2343546"
-    phone_specialist = "3305678989"
+    cc_specialist = 2343546
+    phone_specialist = 3056789
     adress_specialist = "kR8"
     email_specialist = "Veterinaria@gmail.com"
 
