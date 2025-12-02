@@ -4,4 +4,3 @@ source = backend/app
 [report]
 omit =
     */venv/*
-    */tests/*
