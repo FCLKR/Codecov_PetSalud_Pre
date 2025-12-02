@@ -89,6 +89,7 @@ pipeline {
         sh '''
           set -e
           cd /tmp/petsalud
+          docker rm -f backend_test || true
 
           docker compose run --name backend_test --entrypoint "" backend bash -c "
             cd app &&
@@ -137,6 +138,9 @@ pipeline {
   post {
     success {
       echo "Despliegue completado correctamente."
+        sh '''
+          docker compose down --remove-orphans
+        '''
     }
     failure {
       echo "Fallo en el despliegue. Revisa los logs."
