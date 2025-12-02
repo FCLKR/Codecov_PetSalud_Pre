@@ -18,12 +18,12 @@ def test_insertar_specialist_mysql():
     lastName_specialist = "Test"
     cc_specialist = "2343546"
     phone_specialist = "3305678989"
-    address_specialist = "Veterinaria@gmail.com"
+    adress_specialist = "Veterinaria@gmail.com"
 
     # Insertar registro
     insert_query = """
         INSERT INTO myproject_spealist 
-        (name_specialist, lastName_specialist, cc_specialist, phone_specialist, address_specialist)
+        (name_specialist, lastName_specialist, cc_specialist, phone_specialist, adress_specialist)
         VALUES (%s, %s, %s, %s, %s)
     """
     cursor.execute(insert_query, (
@@ -31,7 +31,7 @@ def test_insertar_specialist_mysql():
         lastName_specialist,
         cc_specialist,
         phone_specialist,
-        address_specialist
+        adress_specialist
     ))
     conn.commit()
 
