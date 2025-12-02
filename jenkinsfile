@@ -40,6 +40,8 @@ pipeline {
           echo "docker rmi -f $(docker images -q) || true"
           echo "docker builder prune -a -f"
           echo "Uso por primera vez-docker compose build --no-cache"
+          ls -l /tmp/petsalud/backend
+          sleep 20
           docker compose build --no-cache backend
         '''
       }
@@ -52,7 +54,6 @@ pipeline {
           cd /tmp/petsalud
           docker compose up db -d
           echo "Esperando MySQL..."
-          ls -l /tmp/petsalud/backend
           sleep 10
         '''
       }
