@@ -41,7 +41,6 @@ pipeline {
           echo "docker builder prune -a -f"
           echo "Uso por primera vez-docker compose build --no-cache"
           ls -l /tmp/petsalud/backend
-          sleep 20
           docker compose build --no-cache backend
         '''
       }
