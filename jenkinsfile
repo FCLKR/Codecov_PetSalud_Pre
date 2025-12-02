@@ -36,7 +36,6 @@ pipeline {
           cd /tmp/petsalud
 
           echo "Construcción del proyecto..."
-          docker compose down
           docker compose down --remove-orphans
           echo "docker rmi -f $(docker images -q) || true"
           echo "docker builder prune -a -f"
