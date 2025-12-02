@@ -39,7 +39,8 @@ pipeline {
           docker compose down
           echo "docker rmi -f $(docker images -q) || true"
           echo "docker builder prune -a -f"
-          echo "Uso por primera vez-docker compose build"
+          echo "Uso por primera vez-docker compose build --no-cache"
+          docker compose build --no-cache
         '''
       }
     }
