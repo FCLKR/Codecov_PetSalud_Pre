@@ -53,7 +53,7 @@ pipeline {
           echo "Esperando MySQL..."
           echo "Contenido real del proyecto en Jenkins:"
           ls -R /tmp/petsalud/backend/app/tests
-          sleep 40
+          sleep 10
         '''
       }
     }
