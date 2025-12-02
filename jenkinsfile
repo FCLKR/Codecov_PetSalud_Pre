@@ -38,8 +38,11 @@ pipeline {
           echo "Construcción del proyecto..."
           docker compose down --remove-orphans
           echo "docker rmi -f $(docker images -q) || true"
+          docker rmi -f $(docker images -q) || true
           echo "docker builder prune -a -f"
+          docker builder prune -a -f
           echo "Uso por primera vez-docker compose build --no-cache"
+          docker compose build
         '''
       }
     }
@@ -53,7 +56,7 @@ pipeline {
           echo "Esperando MySQL..."
           echo "Contenido real del proyecto en Jenkins:"
           ls -R /tmp/petsalud/backend/app/tests
-          sleep 20
+          sleep 40
         '''
       }
     }
