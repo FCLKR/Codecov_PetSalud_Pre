@@ -22,7 +22,7 @@ def test_insertar_specialist_mysql():
 
     # Insertar registro
     insert_query = """
-        INSERT INTO myproject_specialist 
+        INSERT INTO myproject_spealist 
         (name_specialist, lastName_specialist, cc_specialist, phone_specialist, address_specialist)
         VALUES (%s, %s, %s, %s, %s)
     """
@@ -43,7 +43,7 @@ def test_insertar_specialist_mysql():
         """
         SELECT name_specialist, lastName_specialist, cc_specialist, 
                phone_specialist, address_specialist
-        FROM myproject_specialist 
+        FROM myproject_spealist 
         WHERE id = %s
         """,
         (last_id,)
