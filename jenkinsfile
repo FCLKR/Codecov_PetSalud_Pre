@@ -144,9 +144,6 @@ pipeline {
   post {
     success {
       echo "Despliegue completado correctamente."
-        sh '''
-          docker compose down --remove-orphans
-        '''
     }
     failure {
       echo "Fallo en el despliegue. Revisa los logs."
