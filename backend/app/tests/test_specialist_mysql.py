@@ -1,5 +1,5 @@
-#import pymysql
-#import pytest
+import pymysql
+import pytest
 
 DB_CONFIG = {
     "host": "db",

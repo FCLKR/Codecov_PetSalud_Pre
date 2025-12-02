@@ -3,3 +3,4 @@ mysqlclient
 django-cors-headers
 coverage
 pytest
+pymysql
