@@ -63,7 +63,7 @@ def test_insertar_specialist_mysql():
     assert result[1] == lastName_specialist
     assert result[2] == cc_specialist
     assert result[3] == phone_specialist
-    assert result[4] == address_specialist
+    assert result[4] == adress_specialist
     assert result[5] == email_specialist
 
     cursor.close()
