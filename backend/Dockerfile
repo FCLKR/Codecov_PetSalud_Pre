@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 # Directorio de trabajo
-WORKDIR /app
+WORKDIR /app/app
 
 # Instalar dependencias del sistema necesarias para mysqlclient y netcat
 RUN apt-get update && apt-get install -y \
@@ -23,7 +23,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar todo el código del backend
-COPY . .
+COPY . /app
 
 # Dar permisos de ejecución al script de entrada
 RUN chmod +x entrypoint.sh
